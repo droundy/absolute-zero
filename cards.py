@@ -1,3 +1,5 @@
+from __future__ import division
+
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -166,12 +168,20 @@ with open('cards.tex', 'w') as f:
 cardx = 2.25
 cardy = 3.5
 border = 0.125
+bordercolor = '#000000'
+bgcolor = '#eeeeee'
+bgcolors = {
+    'c': '#ddffdd',
+    'q': '#ffffcc',
+}
 
-plt.rcParams['axes.linewidth'] = 2.5*border*72
+# The following is an almost-undocumented feature that makes usetex
+# text have a correct baseline alignment.
+plt.rcParams['text.latex.preview'] = True
+plt.rcParams['axes.linewidth'] = 3.5*border*72
 matplotlib.rcParams['text.latex.preamble'] = [
     r'\usepackage{graphicx}'
 ]
-os.system('rm -rf card-output')
 try:
     os.mkdir('card-output')
 except:
@@ -182,6 +192,12 @@ for card in cards:
                         right=(border+cardx)/(cardx+2*border),
                         top=(border+cardy)/(cardy+2*border),
                         bottom=border/(cardy+2*border))
+    for s in plt.axes().spines.values():
+        s.set_color(bordercolor)
+    for i in range(len(card.subjects)):
+        ymin = i*cardy/len(card.subjects)+border
+        ymax = (i+1)*cardy/len(card.subjects)+border
+        plt.axhspan(ymin, ymax, color=bgcolors[card.subjects[i]])
     plt.xticks([])
     plt.yticks([])
     plt.xlim(0, cardx)
@@ -199,25 +215,30 @@ for card in cards:
     txt.remove()
 
     fontsize = 1.5*72/bbox1.width*16
-    plt.text(cardx/2, cardy*.45, bigtext,
+    altfontsize = 1*72/bbox1.height*16
+    fontsize = min(fontsize, altfontsize)
+    plt.text(cardx/2, cardy*.3, bigtext,
              size = fontsize,
              rotation=180,
              horizontalalignment='center',
-             verticalalignment='top',)
+             verticalalignment='center',)
 
-    plt.text(cardx/2, cardy*.55, bigtext,
+    plt.text(cardx/2, cardy*.7, bigtext,
              size = fontsize,
              horizontalalignment='center',
-             verticalalignment='bottom',)
+             verticalalignment='center',)
 
-    plt.text(1.5*border, cardy-2*border, r'\normalsize{%s}' % card.name,
+    edge_offset = 2.8*border
+    plt.text(edge_offset, cardy-2*border, r'\normalsize{%s}' % card.name,
              rotation=90,
-             horizontalalignment='left',
-             verticalalignment='top',)
-    plt.text(cardx-1.5*border, 2*border, r'\normalsize{%s}' % card.name,
-             rotation=270,
+             rotation_mode='anchor',
              horizontalalignment='right',
-             verticalalignment='bottom',)
+             verticalalignment='baseline',)
+    plt.text(cardx-edge_offset, 2*border, r'\normalsize{%s}' % card.name,
+             rotation=270,
+             rotation_mode='anchor',
+             horizontalalignment='right',
+             verticalalignment='baseline',)
     plt.savefig('card-output/'+card.filename()+'.png', dpi=300)
     print 'did', card.filename()
     plt.close()

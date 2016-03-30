@@ -2,3 +2,6 @@
 
 | python2 cards.py
 C ~/.cache
+
+| inkscape back.svg --export-dpi=300 --export-png=card-output/back.png
+c errors.log
