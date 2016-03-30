@@ -14,9 +14,9 @@ cards = []
 def newcard(name, s=[]):
     cards.append(Card(name, s))
 
-newcard(r'$2\times$', ['c'])
-newcard(r'$3\times$', ['c'])
-newcard(r'$\infty\times$', ['c'])
+newcard(r'$2\times$', ['c', 'q'])
+newcard(r'$3\times$', ['c', 'q'])
+newcard(r'$\infty\times$', ['c', 'q'])
 newcard(r'2-level system', ['q'])
 newcard(r'3-level system', ['q'])
 newcard(r'Hamiltonian', ['q'])
