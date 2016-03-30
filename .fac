@@ -1,0 +1,1 @@
+| pdflatex cards.tex && pdflatex cards.tex
