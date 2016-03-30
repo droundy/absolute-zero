@@ -2,7 +2,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy, re, os
-matplotlib.rc('text', usetex=True)
+
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
 
 class Card(object):
     subjects = []
@@ -134,7 +136,14 @@ newcard(r'wave function', ['q'])
 with open('cards.tex', 'w') as f:
     f.write(r'''\documentclass[twocolumn]{article}
 
+\usepackage{graphicx}
+
 \begin{document}
+
+\resizebox{5in}{!}{5 inch test}
+
+\resizebox{3in}{!}{3 inch test}
+
 \section{Classical}
 \begin{enumerate}
 ''')
@@ -158,18 +167,57 @@ cardx = 2.25
 cardy = 3.5
 border = 0.125
 
+plt.rcParams['axes.linewidth'] = 2.5*border*72
+matplotlib.rcParams['text.latex.preamble'] = [
+    r'\usepackage{graphicx}'
+]
 os.system('rm -rf card-output')
 try:
     os.mkdir('card-output')
 except:
     pass
 for card in cards:
-    plt.figure(figsize=(cardx + 2*border, cardy + 2*border))
-    plt.subplots_adjust(left=border/(cardx+2*border))
+    fig = plt.figure(figsize=(cardx + 2*border, cardy + 2*border))
+    plt.subplots_adjust(left=border/(cardx+2*border),
+                        right=(border+cardx)/(cardx+2*border),
+                        top=(border+cardy)/(cardy+2*border),
+                        bottom=border/(cardy+2*border))
     plt.xticks([])
     plt.yticks([])
     plt.xlim(0, cardx)
     plt.ylim(0, cardy)
-    plt.title(card.name)
+    bigtext = r'\resizebox{!}{!}{} ' + '\n'.join(card.name.split(' '))
+    #bigtext = r'\resizebox{!}{!}{} '+card.name
+    print '%s' % bigtext
+    txt = plt.text(cardx/2, cardy*.5, bigtext,
+                   size=16,
+                   horizontalalignment='center',
+                   verticalalignment='top',)
+
+    renderer1 = fig.canvas.get_renderer()
+    bbox1 = txt.get_window_extent(renderer1)
+    txt.remove()
+
+    fontsize = 1.5*72/bbox1.width*16
+    plt.text(cardx/2, cardy*.45, bigtext,
+             size = fontsize,
+             rotation=180,
+             horizontalalignment='center',
+             verticalalignment='top',)
+
+    plt.text(cardx/2, cardy*.55, bigtext,
+             size = fontsize,
+             horizontalalignment='center',
+             verticalalignment='bottom',)
+
+    plt.text(1.5*border, cardy-2*border, r'\normalsize{%s}' % card.name,
+             rotation=90,
+             horizontalalignment='left',
+             verticalalignment='top',)
+    plt.text(cardx-1.5*border, 2*border, r'\normalsize{%s}' % card.name,
+             rotation=270,
+             horizontalalignment='right',
+             verticalalignment='bottom',)
     plt.savefig('card-output/'+card.filename()+'.png', dpi=300)
+    print 'did', card.filename()
     plt.close()
