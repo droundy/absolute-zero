@@ -1,3 +1,4 @@
 | pdflatex cards.tex && pdflatex cards.tex
 
 | python2 cards.py
+C ~/.cache

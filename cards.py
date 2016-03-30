@@ -1,3 +1,9 @@
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import numpy, re, os
+matplotlib.rc('text', usetex=True)
+
 class Card(object):
     subjects = []
     name = ''
@@ -8,6 +14,16 @@ class Card(object):
         return self.name
     def __repr__(self):
         return self.name
+    def filename(self):
+        """
+        Normalizes string, converts to lowercase, removes non-alpha characters,
+        and converts spaces to hyphens.
+        """
+        value = self.name
+        value = re.sub(r'[\\$]+', '', value)
+        value = re.sub(r'^[-\s]*', '', value)
+        value = re.sub(r'[-\s]+', '-', value)
+        return value
 
 cards = []
 
@@ -137,3 +153,23 @@ with open('cards.tex', 'w') as f:
 
 \end{document}
 ''')
+
+cardx = 2.25
+cardy = 3.5
+border = 0.125
+
+os.system('rm -rf card-output')
+try:
+    os.mkdir('card-output')
+except:
+    pass
+for card in cards:
+    plt.figure(figsize=(cardx + 2*border, cardy + 2*border))
+    plt.subplots_adjust(left=border/(cardx+2*border))
+    plt.xticks([])
+    plt.yticks([])
+    plt.xlim(0, cardx)
+    plt.ylim(0, cardy)
+    plt.title(card.name)
+    plt.savefig('card-output/'+card.filename()+'.png', dpi=300)
+    plt.close()
