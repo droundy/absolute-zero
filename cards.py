@@ -3,15 +3,17 @@ from __future__ import division
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import numpy, re, os
+import numpy, re, os, functools, random
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
+@functools.total_ordering
 class Card(object):
     name = ''
     subjects = []
     history = []
+    rarity = 'rare'
     def __init__(self, n, s=[], history=[]):
         self.subjects = s
         self.name = n
@@ -30,196 +32,122 @@ class Card(object):
         value = re.sub(r'^[-\s]*', '', value)
         value = re.sub(r'[-\s]+', '-', value)
         return value
+    def __lt__(self, other):
+        # there should be no different cards with identical names
+        return re.sub(r'[\\$"]+', '', self.name.lower()) < re.sub(r'[\\$"]+', '', other.name.lower())
+    def __eq__(self, other):
+        # there should be no different cards with identical names
+        return self.name == other.name
+    def __ne__(self, other):
+        # there should be no different cards with identical names
+        return self.name != other.name
 
 cards = []
+cardMap = {}
 
-def newcard(name, history=[]):
-    if len(history) > 0:
-        cards.append(Card(name,
-                          list({subject_for_question[i] for i in history}),
-                          history))
+subject_for_question = {}
 
-subject_for_question = {
-    124.1: 'q',
-    124.2: 'q',
-    124.3: 'e',
-    124.4: 'e',
-    124.5: 't',
-    124.6: 't',
-    124.7: 'c',
-    124.8: 'c',
-    125.1: 'q',
-    125.2: 'q',
-    125.3: 'e',
-    125.4: 'e',
-    125.5: 't',
-    125.6: 't',
-    125.7: 'c',
-    125.8: 'c',
+aliases = {
+    '2x': r'$2\times$',
+    '3x': r'$3\times$',
+    'spin 1/2 atom': r'spin $\frac12$ atom',
+    'Schrodinger equation': r'Schr\"odinger equation',
+    'Schroedinger equation': r'Schr\"odinger equation',
+    'Lambda system': r'$\Lambda$ system',
 }
 
-newcard(r'$2\times$', [124.3, 124.4, 125.1, 125.4, 125.5, 125.8])
-newcard(r'$3\times$', [125.7])
-newcard(r'$\infty\times$')
-newcard(r'2-level system')
-newcard(r'3-level system', [124.5])
-newcard(r'Hamiltonian')
-newcard(r'atom', [125.2, 125.5])
-newcard(r'air')
-newcard(r'amplitude', [125.3])
-newcard(r'angle', [125.8])
-newcard(r'angular momentum', [125.2, 125.6])
-newcard(r'area', [125.4])
-newcard(r'axis', [124.2])
-newcard(r'axle', [124.1])
-newcard(r'average', [124.3, 125.3])
-newcard(r'bar')
-newcard(r'box', [125.5])
-newcard(r'charge', [124.2, 124.4, 125.4])
-newcard(r'collision')
-newcard(r'conductivity', [124.3])
-newcard(r'confined')
-newcard(r'conserved')
-newcard(r'constrained', [125.7])
-newcard(r'coupled', [125.7])
-newcard(r'current', [124.3])
-newcard(r'cycle', [124.5])
-newcard(r'cylinder', [125.8])
-newcard(r'degeneracy', [125.2])
-newcard(r'density', [124.3, 124.4, 125.4])
-newcard(r'dielectric', [124.3])
-newcard(r'dipole moment', [124.2])
-newcard(r'disk', [124.2, 124.3])
-newcard(r'dispersion relation', [125.3])
-newcard(r'dissipation', [124.3])
-newcard(r'distance', [124.4, 125.1, 125.4])
-newcard(r'distinguishable', [124.6])
-newcard(r'efficiency', [124.5])
-newcard(r'eigenstate', [124.1, 124.2, 124.6, 125.1])
-newcard(r'eigenvalue', [124.2, 125.1, 125.6])
-newcard(r'eigenvectors')
-newcard(r'electric field', [124.2, 124.3, 124.4, 125.3, 125.4])
-newcard(r'electron', [125.2])
-newcard(r'energy', [124.1, 124.2, 124.3, 124.5, 124.6,
-                    125.1, 125.2, 125.5, 125.6])
-newcard(r'engine', [124.5])
-newcard(r'entropy', [125.5, 124.5, 124.6])
-newcard(r'equation of motion', [125.7, 125.8])
-newcard(r'equilibrium', [125.5, 125.7, 124.7])
-newcard(r'excited', [124.1])
-newcard(r'even')
-newcard(r'expectation value', [124.1])
-newcard(r'far', [124.4])
-newcard(r'fast')
-newcard(r'finite')
-newcard(r'fixed', [124.2])
-newcard(r'flux', [125.3])
-newcard(r'force')
-newcard(r'frequency', [124.1, 124.3, 124.4, 124.7, 125.3, 125.7])
-newcard(r'friction')
-newcard(r'frictionless', [125.7, 124.7, 124.8])
-newcard(r'fulcrum')
-newcard(r'glass')
-newcard(r'gravity', [125.8])
-newcard(r'ground', [125.4])
-newcard(r'harmonic')
-newcard(r'heat', [124.5])
-newcard(r'high', [125.6, 124.6])
-newcard(r'hinge')
-newcard(r'hollow', [124.4])
-newcard(r'hydrogen atom', [125.2])
-newcard(r'ideal gas', [125.5])
-newcard(r'impermeable', [125.5])
-newcard(r'inclined')
-newcard(r'infinite', [125.4])
-newcard(r'index of refraction', [125.3])
-newcard(r'internal', [125.5, 125.6])
-newcard(r'kinetic energy')
-newcard(r'large', [125.2, 124.3])
-newcard(r'light', [125.3])
-newcard(r'low', [125.6, 124.6])
-newcard(r'magnetic', [124.3])
-newcard(r'magnetic field', [125.1, 125.2, 125.3, 124.4])
-newcard(r'magnetic moment', [125.1, 125.2])
-newcard(r'mass', [124.1, 125.7, 124.7, 124.8])
-newcard(r'measurement', [125.1])
-newcard(r'metal', [124.3, 125.4])
-newcard(r'moment of inertia', [124.2, 125.6, 125.8])
-newcard(r'momentum')
-newcard(r'monatomic', [125.5])
-newcard(r'move', [125.5])
-newcard(r'noninteracting', [124.6])
-newcard(r'normal modes', [125.7, 124.7])
-newcard(r'nucleus')
-newcard(r'number', [125.2, 125.5, 125.6, 124.6, 124.8])
-newcard(r'odd')
-newcard(r'orbital', [125.2])
-newcard(r'oscillation', [125.7, 124.7])
-newcard(r'parallel', [125.4])
-newcard(r'partition', [125.5])
-newcard(r'pendulum', [124.7])
-newcard(r'period')
-newcard(r'permeable', [125.5])
-newcard(r'person', [124.8])
-newcard(r'pivot')
-newcard(r'plane wave')
-newcard(r'plane')
-newcard(r'plasma', [125.3])
-newcard(r'plate', [124.3, 125.4])
-newcard(r'point', [125.7])
-newcard(r'position')
-newcard(r'potential', [125.4, 124.4])
-newcard(r'Poynting vector', [124.3, 125.3])
-newcard(r'pressure', [125.5])
-newcard(r'probability')
-newcard(r'pulley')
-newcard(r'quantum', [125.6, 125.2])
-newcard(r'radiation')
-newcard(r'real gas', [124.5])
-newcard(r'relative', [124.8])
-newcard(r'reflection', [125.3])
-newcard(r'remove')
-newcard(r'rigid rotor', [125.6])
-newcard(r'rigid', [125.6])
-newcard(r'ring', [125.7])
-newcard(r'rolling without slipping', [125.8])
-newcard(r'rope')
-newcard(r'rotate', [124.2, 124.4])
-newcard(r'Schr\"odinger equation', [124.1])
-newcard(r'simple harmonic oscillator', [124.1])
-newcard(r'sliding')
-newcard(r'slow', [125.5])
-newcard(r'small', [124.2, 124.3, 124.7, 125.2])
-newcard(r'solid', [125.8])
-newcard(r'speed', [125.1, 124.8])
-newcard(r'sphere', [124.4])
-newcard(r'spherical')
-newcard(r'spin $\frac12$ atom', [125.1])
-newcard(r'spin 1 atom')
-newcard(r'spin', [125.1, 125.2])
-newcard(r'spring', [125.7, 124.7])
-newcard(r'square well')
-newcard(r'static')
-newcard(r'string')
-newcard(r'surface', [125.4, 125.8, 124.4])
-newcard(r'susceptiblity', [124.3])
-newcard(r'symmetry')
-newcard(r'temperature', [125.5, 125.6, 124.5, 124.6])
-newcard(r'tension')
-newcard(r'thickness', [125.4])
-newcard(r'time', [124.1, 124.3, 125.3, 125.7])
-newcard(r'train', [124.8])
-newcard(r'transmission', [125.3])
-newcard(r'uncertainty')
-newcard(r'uniform', [124.3, 124.4])
-newcard(r'vacuum', [125.3])
-newcard(r'volume', [125.5])
-newcard(r'water')
-newcard(r'wave function', [124.1, 124.2])
-newcard(r'wave vector', [125.3])
-newcard(r'work', [124.5])
-newcard(r'velocity', [125.7, 124.8])
-newcard(r'voltage', [124.3])
+def exam(number, subject, topics):
+    subject_for_question[number] = subject
+    for t in topics:
+        if t in aliases:
+            t = aliases[t]
+        if t in cardMap:
+            card = cardMap[t]
+            card.history.append(number)
+            card.subjects += [subject]
+        else:
+            card = Card(t, [subject], [number])
+            cards.append(card)
+            cardMap[t] = card
+
+# Here are the exams
+exam(124.1, 'q', [
+    'frequency', 'mass', 'Schrodinger equation', 'time', 'wave function',
+    'simple harmonic oscillator',
+    'eigenstate', 'energy', 'excited', 'expectation value'])
+exam(124.2, 'q', [
+    'electric field', 'energy', 'fixed', 'moment of inertia', 'rotate',
+    'axle', 'small', 'wave function',
+    'axis', 'charge', 'dipole moment', 'disk', 'eigenstate', 'eigenvalue'])
+exam(124.3, 'e', [
+    '2x', 'average', 'conductivity', 'time', 'uniform', 'voltage', 'AC',
+    'plate', 'Poynting vector', 'small', 'large', 'magnetic',
+    'susceptiblity', 'electric field', 'frequency', 'dielectric',
+    'metal', 'disk', 'energy', 'dissipation', 'current', 'density'])
+exam(124.4, 'e', [
+    '2x', 'charge', 'density', 'distance',
+    'electric field', 'far', 'frequency', 'hollow', 'magnetic field',
+    'potential', 'rotate', 'sphere', 'surface', 'uniform', ])
+exam(124.5, 't', [
+    'cycle', 'efficiency', 'energy', 'engine', 'entropy', 'heat',
+    'real gas', 'temperature', 'work'])
+exam(124.6, 't', [
+    'Lambda system', 'distinguishable', 'eigenstate', 'energy',
+    'entropy', 'high', 'low', 'noninteracting', 'number', 'temperature'])
+exam(124.7, 'c', [
+    'oscillation', 'pendulum', 'small', 'spring', 'block',
+    'equilibrium', 'frequency', 'frictionless', 'mass', 'normal modes'])
+exam(124.8, 'c', [
+    'train', 'velocity',
+    'frictionless', 'mass', 'number', 'person', 'relative', 'speed'])
+exam(125.1, 'q', [
+    'magnetic moment', 'measurement', 'speed', 'spin 1/2 atom', 'spin',
+    '2x', 'distance', 'eigenstate', 'eigenvalue', 'energy', 'magnetic field'])
+exam(125.2, 'q', [
+    'hydrogen atom', 'large', 'magnetic field', 'magnetic moment',
+    'orbital', 'quantum', 'number', 'small',
+    'atom', 'angular momentum', 'degeneracy', 'electron', 'energy'])
+exam(125.3, 'e', [
+    'frequency', 'index of refraction', 'light', 'magnetic field', 'plasma',
+    'Poynting vector', 'reflection', 'time', 'transmission', 'vacuum',
+    'wave vector',
+    'amplitude', 'average', 'dispersion relation', 'electric field', 'flux'])
+exam(125.4, 'e', [
+    'ground', 'infinite', 'metal', 'parallel', 'plate', 'potential',
+    'surface', 'thickness',
+    '2x', 'area', 'charge', 'density', 'distance', 'electric field'])
+exam(125.5, 't', [
+    'permeable', 'pressure', 'slow', 'temperature', 'volume',
+    'impermeable', 'internal', 'monatomic', 'move', 'number', 'partition',
+    '2x', 'atom', 'box', 'energy', 'entropy', 'equilibrium', 'ideal gas'])
+exam(125.6, 't', [
+    'rigid', 'temperature',
+    'low', 'moment of inertia', 'number', 'quantum', 'rigid rotor',
+    'angular momentum', 'eigenvalue', 'energy', 'high', 'internal'])
+exam(125.7, 'c', [
+    'point', 'ring', 'spring', 'time', 'velocity',
+    'frequency', 'frictionless', 'mass', 'normal modes', 'oscillation',
+    '3x', 'constrained', 'coupled', 'equation of motion', 'equilibrium'])
+exam(125.8, 'c', [
+    '2x', 'angle', 'cylinder', 'equation of motion', 'gravity',
+    'moment of inertia', 'rolling without slipping', 'solid', 'surface'])
+
+common_limit = 1
+ubiquitous_limit = 3*common_limit
+ubiquitous = sorted([c for c in cards
+                     if len(c.history) > ubiquitous_limit])
+for u in ubiquitous:
+    u.rarity = 'ubiquitous'
+commons = sorted([c for c in cards
+                  if len(c.history) > common_limit
+                  and len(c.history) <= ubiquitous_limit])
+for c in commons:
+    c.rarity = 'common'
+rares = sorted([c for c in cards
+                if len(c.history) > 0
+                and len(c.history) <= common_limit])
+for r in rares:
+    r.rarity = 'rare'
 
 with open('cards.tex', 'w') as f:
     f.write(r'''\documentclass[twocolumn]{article}
@@ -262,16 +190,9 @@ with open('cards.tex', 'w') as f:
         num = len([h for h in card.history if subject_for_question[h] == 'e'])
         if num > 0:
             f.write(r'\item %s (%d)' % (card.name, num) + '\n')
-    ubiquitous_limit = 5
-    common_limit = 1
-    ubiquitous = [c for c in cards
-                  if len(c.history) > ubiquitous_limit]
-    commons = [c for c in cards
-               if len(c.history) > common_limit and len(c.history) <= ubiquitous_limit]
-    rares = [c for c in cards
-             if len(c.history) > 0 and len(c.history) <= common_limit]
     f.write(r'''\end{enumerate}
 
+    \clearpage
     \section{Ubiquitous cards (%d)}
 \begin{enumerate}
 ''' % len(ubiquitous))
@@ -328,9 +249,18 @@ for card in cards:
                         bottom=border/(cardy+2*border))
     for s in plt.axes().spines.values():
         s.set_color(bordercolor)
+    hist = {}
+    for x in card.subjects:
+        # randomize a bit so we won't get equal results for two
+        # subjects
+        hist[x] = hist.get(x,0) + random.gauss(1, 0.001)
+    card.subjects.sort(key=lambda x: hist[x])
     for i in range(len(card.subjects)):
-        ymin = i*(cardy-2*lining)/len(card.subjects)+lining
-        ymax = (i+1)*(cardy-2*lining)/len(card.subjects)+lining
+        ymin = i*(cardy-2*lining)/len(card.subjects)/2+lining
+        ymax = (i+1)*(cardy-2*lining)/len(card.subjects)/2+lining
+        plt.axhspan(ymin, ymax, color=bgcolors[card.subjects[i]])
+        ymin = cardy - i*(cardy-2*lining)/len(card.subjects)/2-lining
+        ymax = cardy - (i+1)*(cardy-2*lining)/len(card.subjects)/2-lining
         plt.axhspan(ymin, ymax, color=bgcolors[card.subjects[i]])
     plt.xticks([])
     plt.yticks([])
@@ -364,18 +294,32 @@ for card in cards:
 
     edge_offset = 2.0*border
     plt.text(edge_offset, cardy-2*border,
-             r'\normalsize{%s (%d)}' % (card.name, len(card.history)),
+             r'\normalsize{%s}' % (card.name),
              rotation=90,
              color='white',
              rotation_mode='anchor',
              horizontalalignment='right',
              verticalalignment='baseline',)
     plt.text(cardx-edge_offset, 2*border,
-             r'\normalsize{%s (%d)}' % (card.name, len(card.history)),
+             r'\normalsize{%s}' % (card.name),
              rotation=270,
              color='white',
              rotation_mode='anchor',
              horizontalalignment='right',
+             verticalalignment='baseline',)
+    plt.text(cardx/2, edge_offset,
+             r'\tiny{\em %s}' % (card.rarity),
+             rotation=0,
+             color='white',
+             rotation_mode='anchor',
+             horizontalalignment='center',
+             verticalalignment='baseline',)
+    plt.text(cardx/2, cardy-edge_offset,
+             r'\tiny{\em %s}' % (card.rarity),
+             rotation=180,
+             color='white',
+             rotation_mode='anchor',
+             horizontalalignment='center',
              verticalalignment='baseline',)
     plt.savefig('card-output/'+card.filename()+'.png', dpi=300)
     print 'did', card.filename()
