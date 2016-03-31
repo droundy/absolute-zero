@@ -26,7 +26,7 @@ class Card(object):
         and converts spaces to hyphens.
         """
         value = self.name
-        value = re.sub(r'[\\$]+', '', value)
+        value = re.sub(r'[\\$"]+', '', value)
         value = re.sub(r'^[-\s]*', '', value)
         value = re.sub(r'[-\s]+', '-', value)
         return value
@@ -40,6 +40,14 @@ def newcard(name, history=[]):
                           history))
 
 subject_for_question = {
+    124.1: 'q',
+    124.2: 'q',
+    124.3: 'e',
+    124.4: 'e',
+    124.5: 't',
+    124.6: 't',
+    124.7: 'c',
+    124.8: 'c',
     125.1: 'q',
     125.2: 'q',
     125.3: 'e',
@@ -50,11 +58,11 @@ subject_for_question = {
     125.8: 'c',
 }
 
-newcard(r'$2\times$', [125.1, 125.4, 125.5, 125.8])
+newcard(r'$2\times$', [124.3, 124.4, 125.1, 125.4, 125.5, 125.8])
 newcard(r'$3\times$', [125.7])
 newcard(r'$\infty\times$')
 newcard(r'2-level system')
-newcard(r'3-level system')
+newcard(r'3-level system', [124.5])
 newcard(r'Hamiltonian')
 newcard(r'atom', [125.2, 125.5])
 newcard(r'air')
@@ -62,50 +70,63 @@ newcard(r'amplitude', [125.3])
 newcard(r'angle', [125.8])
 newcard(r'angular momentum', [125.2, 125.6])
 newcard(r'area', [125.4])
-newcard(r'axis')
-newcard(r'axle')
-newcard(r'average', [125.3])
+newcard(r'axis', [124.2])
+newcard(r'axle', [124.1])
+newcard(r'average', [124.3, 125.3])
 newcard(r'bar')
 newcard(r'box', [125.5])
-newcard(r'charge', [125.4])
+newcard(r'charge', [124.2, 124.4, 125.4])
 newcard(r'collision')
+newcard(r'conductivity', [124.3])
 newcard(r'confined')
 newcard(r'conserved')
 newcard(r'constrained', [125.7])
 newcard(r'coupled', [125.7])
+newcard(r'current', [124.3])
+newcard(r'cycle', [124.5])
 newcard(r'cylinder', [125.8])
 newcard(r'degeneracy', [125.2])
-newcard(r'density', [125.4])
-newcard(r'dipole moment')
-newcard(r'disk')
+newcard(r'density', [124.3, 124.4, 125.4])
+newcard(r'dielectric', [124.3])
+newcard(r'dipole moment', [124.2])
+newcard(r'disk', [124.2, 124.3])
 newcard(r'dispersion relation', [125.3])
-newcard(r'distance', [125.1, 125.4])
-newcard(r'eigenstate', [125.1])
-newcard(r'eigenvalue', [125.1, 125.6])
+newcard(r'dissipation', [124.3])
+newcard(r'distance', [124.4, 125.1, 125.4])
+newcard(r'distinguishable', [124.6])
+newcard(r'efficiency', [124.5])
+newcard(r'eigenstate', [124.1, 124.2, 124.6, 125.1])
+newcard(r'eigenvalue', [124.2, 125.1, 125.6])
 newcard(r'eigenvectors')
-newcard(r'electric field', [125.3, 125.4])
+newcard(r'electric field', [124.2, 124.3, 124.4, 125.3, 125.4])
 newcard(r'electron', [125.2])
-newcard(r'energy', [125.1, 125.2, 125.5, 125.6])
-newcard(r'entropy', [125.5])
+newcard(r'energy', [124.1, 124.2, 124.3, 124.5, 124.6,
+                    125.1, 125.2, 125.5, 125.6])
+newcard(r'engine', [124.5])
+newcard(r'entropy', [125.5, 124.5, 124.6])
 newcard(r'equation of motion', [125.7, 125.8])
-newcard(r'equilibrium', [125.5, 125.7])
+newcard(r'equilibrium', [125.5, 125.7, 124.7])
+newcard(r'excited', [124.1])
 newcard(r'even')
-newcard(r'expectation value')
+newcard(r'expectation value', [124.1])
+newcard(r'far', [124.4])
 newcard(r'fast')
 newcard(r'finite')
+newcard(r'fixed', [124.2])
 newcard(r'flux', [125.3])
 newcard(r'force')
-newcard(r'frequency', [125.3, 125.7])
+newcard(r'frequency', [124.1, 124.3, 124.4, 124.7, 125.3, 125.7])
 newcard(r'friction')
-newcard(r'frictionless', [125.7])
+newcard(r'frictionless', [125.7, 124.7, 124.8])
 newcard(r'fulcrum')
 newcard(r'glass')
 newcard(r'gravity', [125.8])
 newcard(r'ground', [125.4])
 newcard(r'harmonic')
-newcard(r'high', [125.6])
+newcard(r'heat', [124.5])
+newcard(r'high', [125.6, 124.6])
 newcard(r'hinge')
-newcard(r'hollow')
+newcard(r'hollow', [124.4])
 newcard(r'hydrogen atom', [125.2])
 newcard(r'ideal gas', [125.5])
 newcard(r'impermeable', [125.5])
@@ -114,42 +135,48 @@ newcard(r'infinite', [125.4])
 newcard(r'index of refraction', [125.3])
 newcard(r'internal', [125.5, 125.6])
 newcard(r'kinetic energy')
-newcard(r'large', [125.2])
+newcard(r'large', [125.2, 124.3])
 newcard(r'light', [125.3])
-newcard(r'low', [125.6])
-newcard(r'magnetic field', [125.1, 125.2, 125.3])
+newcard(r'low', [125.6, 124.6])
+newcard(r'magnetic', [124.3])
+newcard(r'magnetic field', [125.1, 125.2, 125.3, 124.4])
 newcard(r'magnetic moment', [125.1, 125.2])
-newcard(r'mass', [125.7])
+newcard(r'mass', [124.1, 125.7, 124.7, 124.8])
 newcard(r'measurement', [125.1])
-newcard(r'metal', [125.4])
-newcard(r'moment of inertia', [125.6, 125.8])
+newcard(r'metal', [124.3, 125.4])
+newcard(r'moment of inertia', [124.2, 125.6, 125.8])
 newcard(r'momentum')
 newcard(r'monatomic', [125.5])
 newcard(r'move', [125.5])
-newcard(r'normal modes', [125.7])
+newcard(r'noninteracting', [124.6])
+newcard(r'normal modes', [125.7, 124.7])
 newcard(r'nucleus')
-newcard(r'number', [125.2, 125.5, 125.6])
+newcard(r'number', [125.2, 125.5, 125.6, 124.6, 124.8])
 newcard(r'odd')
 newcard(r'orbital', [125.2])
-newcard(r'oscillation', [125.7])
+newcard(r'oscillation', [125.7, 124.7])
 newcard(r'parallel', [125.4])
 newcard(r'partition', [125.5])
+newcard(r'pendulum', [124.7])
 newcard(r'period')
 newcard(r'permeable', [125.5])
+newcard(r'person', [124.8])
 newcard(r'pivot')
 newcard(r'plane wave')
 newcard(r'plane')
 newcard(r'plasma', [125.3])
-newcard(r'plate', [125.4])
+newcard(r'plate', [124.3, 125.4])
 newcard(r'point', [125.7])
 newcard(r'position')
-newcard(r'potential', [125.4])
-newcard(r'Poynting vector', [125.3])
+newcard(r'potential', [125.4, 124.4])
+newcard(r'Poynting vector', [124.3, 125.3])
 newcard(r'pressure', [125.5])
 newcard(r'probability')
 newcard(r'pulley')
 newcard(r'quantum', [125.6, 125.2])
 newcard(r'radiation')
+newcard(r'real gas', [124.5])
+newcard(r'relative', [124.8])
 newcard(r'reflection', [125.3])
 newcard(r'remove')
 newcard(r'rigid rotor', [125.6])
@@ -157,35 +184,42 @@ newcard(r'rigid', [125.6])
 newcard(r'ring', [125.7])
 newcard(r'rolling without slipping', [125.8])
 newcard(r'rope')
-newcard(r'simple harmonic oscillator')
+newcard(r'rotate', [124.2, 124.4])
+newcard(r'Schr\"odinger equation', [124.1])
+newcard(r'simple harmonic oscillator', [124.1])
 newcard(r'sliding')
 newcard(r'slow', [125.5])
-newcard(r'small', [125.2])
+newcard(r'small', [124.2, 124.3, 124.7, 125.2])
 newcard(r'solid', [125.8])
-newcard(r'speed', [125.1])
-newcard(r'sphere')
+newcard(r'speed', [125.1, 124.8])
+newcard(r'sphere', [124.4])
 newcard(r'spherical')
 newcard(r'spin $\frac12$ atom', [125.1])
 newcard(r'spin 1 atom')
 newcard(r'spin', [125.1, 125.2])
-newcard(r'spring', [125.7])
+newcard(r'spring', [125.7, 124.7])
 newcard(r'square well')
 newcard(r'static')
 newcard(r'string')
-newcard(r'surface', [125.4, 125.8])
+newcard(r'surface', [125.4, 125.8, 124.4])
+newcard(r'susceptiblity', [124.3])
 newcard(r'symmetry')
-newcard(r'temperature', [125.5, 125.6])
+newcard(r'temperature', [125.5, 125.6, 124.5, 124.6])
 newcard(r'tension')
 newcard(r'thickness', [125.4])
-newcard(r'time', [125.3, 125.7])
+newcard(r'time', [124.1, 124.3, 125.3, 125.7])
+newcard(r'train', [124.8])
 newcard(r'transmission', [125.3])
 newcard(r'uncertainty')
+newcard(r'uniform', [124.3, 124.4])
 newcard(r'vacuum', [125.3])
 newcard(r'volume', [125.5])
 newcard(r'water')
-newcard(r'wave function')
+newcard(r'wave function', [124.1, 124.2])
 newcard(r'wave vector', [125.3])
-newcard(r'velocity', [125.7])
+newcard(r'work', [124.5])
+newcard(r'velocity', [125.7, 124.8])
+newcard(r'voltage', [124.3])
 
 with open('cards.tex', 'w') as f:
     f.write(r'''\documentclass[twocolumn]{article}
@@ -194,40 +228,69 @@ with open('cards.tex', 'w') as f:
 
 \begin{document}
 
-\resizebox{5in}{!}{5 inch test}
-
-\resizebox{3in}{!}{3 inch test}
-
 \section{Classical}
 \begin{enumerate}
 ''')
     for card in cards:
-        if 'c' in card.subjects:
-            f.write(r'\item ' + str(card) + '\n')
+        num = len([h for h in card.history if subject_for_question[h] == 'c'])
+        if num > 0:
+            f.write(r'\item %s (%d)' % (card.name, num) + '\n')
     f.write(r'''\end{enumerate}
 
     \section{Quantum}
 \begin{enumerate}
 ''')
     for card in cards:
-        if 'q' in card.subjects:
-            f.write(r'\item ' + str(card) + '\n')
+        num = len([h for h in card.history if subject_for_question[h] == 'q'])
+        if num > 0:
+            f.write(r'\item %s (%d)' % (card.name, num) + '\n')
     f.write(r'''\end{enumerate}
 
     \section{Thermal}
 \begin{enumerate}
 ''')
     for card in cards:
-        if 't' in card.subjects:
-            f.write(r'\item ' + str(card) + '\n')
+        num = len([h for h in card.history if subject_for_question[h] == 't'])
+        if num > 0:
+            f.write(r'\item %s (%d)' % (card.name, num) + '\n')
     f.write(r'''\end{enumerate}
 
     \section{E\&M}
 \begin{enumerate}
 ''')
     for card in cards:
-        if 'e' in card.subjects:
-            f.write(r'\item ' + str(card) + '\n')
+        num = len([h for h in card.history if subject_for_question[h] == 'e'])
+        if num > 0:
+            f.write(r'\item %s (%d)' % (card.name, num) + '\n')
+    ubiquitous_limit = 5
+    common_limit = 1
+    ubiquitous = [c for c in cards
+                  if len(c.history) > ubiquitous_limit]
+    commons = [c for c in cards
+               if len(c.history) > common_limit and len(c.history) <= ubiquitous_limit]
+    rares = [c for c in cards
+             if len(c.history) > 0 and len(c.history) <= common_limit]
+    f.write(r'''\end{enumerate}
+
+    \section{Ubiquitous cards (%d)}
+\begin{enumerate}
+''' % len(ubiquitous))
+    for card in ubiquitous:
+        f.write(r'\item %s (%d)' % (card.name, len(card.history)) + '\n')
+    f.write(r'''\end{enumerate}
+
+    \section{Common cards (%d)}
+\begin{enumerate}
+''' % len(commons))
+    for card in commons:
+        f.write(r'\item %s (%d)' % (card.name, len(card.history)) + '\n')
+    f.write(r'''\end{enumerate}
+
+    \section{Rare cards (%d)}
+\begin{enumerate}
+''' % len(rares))
+    for card in rares:
+        f.write(r'\item %s (%d)' % (card.name, len(card.history)) + '\n')
     f.write(r'''\end{enumerate}
 
 \end{document}
