@@ -1,5 +1,7 @@
 | pdflatex cards.tex && pdflatex cards.tex
 < cards.tex
+c .aux
+c .log
 
 | python2 cards.py
 > cards.tex

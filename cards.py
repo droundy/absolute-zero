@@ -179,6 +179,8 @@ exam(125.8, 'c', [
     'moment of inertia', 'rolling without slipping', 'solid', 'surface'])
 
 total_history = sum([len(c.history) for c in cards])
+history_per_copy = total_history/108
+print 'history_per_copy', history_per_copy
 cards.sort() # first sort alphabetically
 cards.sort(key=lambda x: len(x.history))
 cumulative_history = 0
@@ -199,6 +201,22 @@ rares = sorted([c for c in cards
                 if c.rarity == 'rare'])
 commons = sorted([c for c in cards
                   if c.rarity == 'common'])
+cards.reverse()
+copies_left = 108
+for c in cards:
+    ncopy = int(round(len(c.history)/history_per_copy))
+    if ncopy < copies_left:
+        c.copies = ncopy
+        copies_left -= ncopy
+    else:
+        c.copies = copies_left
+        copies_left = 0
+for c in cards:
+    if copies_left > 0:
+        c.copies += 1
+        copies_left -= 1
+    else:
+        break
 
 with open('cards.tex', 'w') as f:
     f.write(r'''\documentclass[twocolumn]{article}
@@ -248,21 +266,27 @@ with open('cards.tex', 'w') as f:
 \begin{enumerate}
 ''' % len(ubiquitous))
     for card in ubiquitous:
-        f.write(r'\item %s (%d)' % (card.name, len(card.history)) + '\n')
+        f.write(r'\item %s (%d)  $\times %d$' % (card.name,
+                                                 len(card.history),
+                                                 card.copies) + '\n')
     f.write(r'''\end{enumerate}
 
     \section{Common cards (%d)}
 \begin{enumerate}
 ''' % len(commons))
     for card in commons:
-        f.write(r'\item %s (%d)' % (card.name, len(card.history)) + '\n')
+        f.write(r'\item %s (%d)  $\times %d$' % (card.name,
+                                                 len(card.history),
+                                                 card.copies) + '\n')
     f.write(r'''\end{enumerate}
 
     \section{Rare cards (%d)}
 \begin{enumerate}
 ''' % len(rares))
     for card in rares:
-        f.write(r'\item %s (%d)' % (card.name, len(card.history)) + '\n')
+        f.write(r'\item %s (%d)  $\times %d$' % (card.name,
+                                                 len(card.history),
+                                                 card.copies) + '\n')
     f.write(r'''\end{enumerate}
 
 \end{document}
@@ -288,8 +312,8 @@ plt.rcParams['axes.linewidth'] = 2*lining*72
 matplotlib.rcParams['text.latex.preamble'] = [
     r'\usepackage{graphicx}'
 ]
-os.system('rm -rf cards-rare cards-ubiquitous cards-common')
-for d in ['cards-rare', 'cards-ubiquitous', 'cards-common']:
+os.system('rm -rf cards-rare cards-ubiquitous cards-common cards-count')
+for d in ['cards-rare', 'cards-ubiquitous', 'cards-common', 'cards-count']:
     os.mkdir(d)
 for card in cards:
     fig = plt.figure(figsize=(cardx + 2*border, cardy + 2*border))
@@ -385,4 +409,8 @@ for card in cards:
     plt.savefig('cards-{}/{}.png'.format(card.rarity,
                                          card.filename()),
                 dpi=300)
+    if card.copies > 0:
+        plt.savefig('cards-count/{}[{}].png'.format(card.filename(),
+                                                    card.copies),
+                    dpi=300)
     plt.close()
