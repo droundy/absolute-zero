@@ -224,10 +224,10 @@ lining = 2.5*border # the thickness of the black edge on the card
 bordercolor = '#000000'
 bgcolor = '#eeeeee'
 bgcolors = {
-    'c': '#00ff00',
-    'q': '#ffff00',
-    't': '#ff9900',
-    'e': '#2255ff',
+    'c': numpy.array([0,1,0]), # '#00ff00',
+    'q': numpy.array([1,1,0]), # '#ffff00',
+    't': numpy.array([1, 9/16, 0]), # '#ff9900',
+    'e': numpy.array([2/16, 5/16, 1]), # '#2255ff',
 }
 
 # The following is an almost-undocumented feature that makes usetex
@@ -255,6 +255,7 @@ for card in cards:
         # subjects
         hist[x] = hist.get(x,0) + random.gauss(1, 0.001)
     card.subjects.sort(key=lambda x: hist[x])
+    meancolor = numpy.zeros(3)
     for i in range(len(card.subjects)):
         ymin = i*(cardy-2*lining)/len(card.subjects)/2+lining
         ymax = (i+1)*(cardy-2*lining)/len(card.subjects)/2+lining
@@ -262,13 +263,14 @@ for card in cards:
         ymin = cardy - i*(cardy-2*lining)/len(card.subjects)/2-lining
         ymax = cardy - (i+1)*(cardy-2*lining)/len(card.subjects)/2-lining
         plt.axhspan(ymin, ymax, color=bgcolors[card.subjects[i]])
+        meancolor += bgcolors[card.subjects[i]]
+    meancolor /= meancolor.max()
     plt.xticks([])
     plt.yticks([])
     plt.xlim(0, cardx)
     plt.ylim(0, cardy)
     bigtext = r'\resizebox{!}{!}{} ' + '\n'.join(card.name.split(' '))
     #bigtext = r'\resizebox{!}{!}{} '+card.name
-    print '%s' % bigtext
     txt = plt.text(cardx/2, cardy*.5, bigtext,
                    size=16,
                    horizontalalignment='center',
@@ -307,20 +309,23 @@ for card in cards:
              rotation_mode='anchor',
              horizontalalignment='right',
              verticalalignment='baseline',)
+    percent_frequency = len(card.history)/len(subject_for_question)*100
+    rarity_text = r'\tiny{\em %s (%.0f\%%)}' % (card.rarity, percent_frequency)
+    if percent_frequency <= 0.5:
+        rarity_text = r'\tiny{\em %s}' % (card.rarity)
     plt.text(cardx/2, edge_offset,
-             r'\tiny{\em %s}' % (card.rarity),
+             rarity_text,
              rotation=0,
-             color='white',
+             color=meancolor,
              rotation_mode='anchor',
              horizontalalignment='center',
              verticalalignment='baseline',)
     plt.text(cardx/2, cardy-edge_offset,
-             r'\tiny{\em %s}' % (card.rarity),
+             rarity_text,
              rotation=180,
-             color='white',
+             color=meancolor,
              rotation_mode='anchor',
              horizontalalignment='center',
              verticalalignment='baseline',)
     plt.savefig('card-output/'+card.filename()+'.png', dpi=300)
-    print 'did', card.filename()
     plt.close()
