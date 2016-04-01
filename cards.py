@@ -28,6 +28,7 @@ class Card(object):
         and converts spaces to hyphens.
         """
         value = self.name
+        value = re.sub(r' \(.+\)', '', value)
         value = re.sub(r'[\\$"]+', '', value)
         value = re.sub(r'^[-\s]*', '', value)
         value = re.sub(r'[-\s]+', '-', value)
@@ -54,6 +55,17 @@ aliases = {
     'Schrodinger equation': r'Schr\"odinger equation',
     'Schroedinger equation': r'Schr\"odinger equation',
     'Lambda system': r'$\Lambda$ system',
+
+    'small': r'small (short) (low)',
+    'short': r'small (short) (low)',
+    'low': r'small (short) (low)',
+
+    'large': r'large (long) (high)',
+    'long': r'large (long) (high)',
+    'high': r'large (long) (high)',
+
+    'box': 'box (chamber)',
+    'chamber': 'box (chamber)',
 }
 
 def exam(number, subject, topics):
@@ -71,6 +83,40 @@ def exam(number, subject, topics):
             cardMap[t] = card
 
 # Here are the exams
+exam(123.1, 'q', [
+    'quantum', 'point particle', 'mass', 'potential', 'gravity',
+    'wave function', 'ground state', 'variational priciple'])
+exam(123.2, 'q', [
+    'electron', 'positron', 'spin', 'Hamiltonian', 'magnetic field',
+    'eigenstate', 'energy'])
+exam(123.3, 'e', [
+    'rigid', 'metal', 'wire', 'plane', 'gravity', 'magnetic field',
+    'width', 'length', 'mass', 'resistance', 'acceleration', 'force',
+    'time', 'short', '2x'])
+exam(123.4, 'e', [
+    'Maxwell equations', 'dielectric', 'insulator',
+    'dielectric permittivity', 'magnetic pemeability', 'monochromatic',
+    'radiation', 'electric field', 'phase velocity', 'conductivity',
+    'current', 'density', 'charge', 'free', 'wave', 'dispersion relation',
+    'amplitude', 'small', 'attenuation', 'phase'])
+exam(123.5, 't', [
+    'polymer', 'chain', 'length', 'short', 'long', 'force', 'number',
+    'energy', 'conservation', 'internal', 'temperature', 'work',
+    'canonical ensemble', 'partition function', 'Helmholtz free energy',
+    'small', 'spring constant', 'infinite'])
+exam(123.6, 't', [
+    'ideal gas', 'monatomic', 'temperature', 'volume', 'pressure', 'number',
+    'atom', 'partition', 'chamber', 'second law of thermodynamics',
+    'energy', 'work', 'entropy', 'information', 'measurement'])
+exam(123.7, 'c', [
+    'swing', 'mass', 'rope', 'massless', 'arc', 'radius', 'hoop',
+    'rolling without slipping', 'gravity', 'equation of motion',
+    'angle', 'small', 'equilibrium', 'frequency', 'oscillation'])
+exam(123.8, 'c', [
+    'solid', 'sphere', 'mass', 'radius', 'stationary', 'velocity',
+    'angular momentum', 'slips', 'friction', 'coefficient of friction',
+    'moment of inertia', 'rolling without slipping', 'energy', 'kinetic',
+    'heat', 'time', 'distance'])
 exam(124.1, 'q', [
     'frequency', 'mass', 'Schrodinger equation', 'time', 'wave function',
     'simple harmonic oscillator',
@@ -274,7 +320,9 @@ for card in cards:
     plt.xlim(0, cardx)
     plt.ylim(0, cardy)
     bigtext = r'\resizebox{!}{!}{} ' + '\n'.join(card.name.split(' '))
-    #bigtext = r'\resizebox{!}{!}{} '+card.name
+    # print 'bigtext:', bigtext
+    bigtext = re.sub(r'\n\((.+)\)', '\n'+r'\\textit{\1}', bigtext)
+    # print '        ', bigtext
     txt = plt.text(cardx/2, cardy*.5, bigtext,
                    size=16,
                    horizontalalignment='center',
@@ -299,15 +347,17 @@ for card in cards:
              verticalalignment='center',)
 
     edge_offset = 2.0*border
+    edge_name = r'\normalsize{%s}' % (card.name)
+    edge_name = re.sub(r' \(.+\)', '', edge_name)
     plt.text(edge_offset, cardy-2*border,
-             r'\normalsize{%s}' % (card.name),
+             edge_name,
              rotation=90,
              color='white',
              rotation_mode='anchor',
              horizontalalignment='right',
              verticalalignment='baseline',)
     plt.text(cardx-edge_offset, 2*border,
-             r'\normalsize{%s}' % (card.name),
+             edge_name,
              rotation=270,
              color='white',
              rotation_mode='anchor',
