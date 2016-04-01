@@ -3,7 +3,7 @@
 | python2 cards.py
 C ~/.cache
 
-| inkscape back.svg --export-dpi=300 --export-png=card-output/back.png
+| inkscape back.svg --export-dpi=300 --export-png=back.png
 c errors.log
 
 | inkscape box.svg --export-dpi=375 --export-png=box.png

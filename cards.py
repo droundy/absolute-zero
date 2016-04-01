@@ -132,22 +132,27 @@ exam(125.8, 'c', [
     '2x', 'angle', 'cylinder', 'equation of motion', 'gravity',
     'moment of inertia', 'rolling without slipping', 'solid', 'surface'])
 
-common_limit = 1
-ubiquitous_limit = 3*common_limit
+total_history = sum([len(c.history) for c in cards])
+cards.sort() # first sort alphabetically
+cards.sort(key=lambda x: len(x.history))
+cumulative_history = 0
+cumulative_rarity = 'rare'
+for c in cards:
+    cumulative_history += len(c.history)
+    if cumulative_history > 2*total_history/3:
+        cumulative_rarity = 'ubiquitous'
+    elif cumulative_history > total_history/3:
+        cumulative_rarity = 'common'
+        ubiquitous_limit = len(c.history)
+    else:
+        common_limit = len(c.history)
+    c.rarity = cumulative_rarity
 ubiquitous = sorted([c for c in cards
-                     if len(c.history) > ubiquitous_limit])
-for u in ubiquitous:
-    u.rarity = 'ubiquitous'
-commons = sorted([c for c in cards
-                  if len(c.history) > common_limit
-                  and len(c.history) <= ubiquitous_limit])
-for c in commons:
-    c.rarity = 'common'
+                     if c.rarity == 'ubiquitous'])
 rares = sorted([c for c in cards
-                if len(c.history) > 0
-                and len(c.history) <= common_limit])
-for r in rares:
-    r.rarity = 'rare'
+                if c.rarity == 'rare'])
+commons = sorted([c for c in cards
+                  if c.rarity == 'common'])
 
 with open('cards.tex', 'w') as f:
     f.write(r'''\documentclass[twocolumn]{article}
@@ -237,10 +242,9 @@ plt.rcParams['axes.linewidth'] = 2*lining*72
 matplotlib.rcParams['text.latex.preamble'] = [
     r'\usepackage{graphicx}'
 ]
-try:
-    os.mkdir('card-output')
-except:
-    pass
+os.system('rm -rf cards-rare cards-ubiquitous cards-common')
+for d in ['cards-rare', 'cards-ubiquitous', 'cards-common']:
+    os.mkdir(d)
 for card in cards:
     fig = plt.figure(figsize=(cardx + 2*border, cardy + 2*border))
     plt.subplots_adjust(left=border/(cardx+2*border),
@@ -313,19 +317,22 @@ for card in cards:
     rarity_text = r'\tiny{\em %s (%.0f\%%)}' % (card.rarity, percent_frequency)
     if percent_frequency <= 0.5:
         rarity_text = r'\tiny{\em %s}' % (card.rarity)
-    plt.text(cardx/2, edge_offset,
+    rarity_offset = 1.0*border
+    plt.text(cardx/2, rarity_offset,
              rarity_text,
              rotation=0,
              color=meancolor,
              rotation_mode='anchor',
              horizontalalignment='center',
              verticalalignment='baseline',)
-    plt.text(cardx/2, cardy-edge_offset,
+    plt.text(cardx/2, cardy-rarity_offset,
              rarity_text,
              rotation=180,
              color=meancolor,
              rotation_mode='anchor',
              horizontalalignment='center',
              verticalalignment='baseline',)
-    plt.savefig('card-output/'+card.filename()+'.png', dpi=300)
+    plt.savefig('cards-{}/{}.png'.format(card.rarity,
+                                         card.filename()),
+                dpi=300)
     plt.close()

@@ -4,5 +4,6 @@
 *.log
 *.aux
 cards.tex
-card-output
 box.png
+back.png
+cards-*/*.png
