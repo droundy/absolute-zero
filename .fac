@@ -3,9 +3,15 @@
 c .aux
 c .log
 
+| pdflatex rules.tex && pdflatex rules.tex
+< rules.tex
+c .aux
+c .log
+
 | python2 cards.py
-> cards.tex
 C ~/.cache
+c .pyc
+# > cards.tex
 
 | inkscape back.svg --export-dpi=300 --export-png=back.png
 c errors.log

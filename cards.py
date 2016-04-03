@@ -312,9 +312,12 @@ plt.rcParams['axes.linewidth'] = 2*lining*72
 matplotlib.rcParams['text.latex.preamble'] = [
     r'\usepackage{graphicx}'
 ]
-os.system('rm -rf cards-rare cards-ubiquitous cards-common cards-count')
+# os.system('rm -rf cards-rare cards-ubiquitous cards-common cards-count')
 for d in ['cards-rare', 'cards-ubiquitous', 'cards-common', 'cards-count']:
-    os.mkdir(d)
+    try:
+        os.mkdir(d)
+    except:
+        pass
 for card in cards:
     fig = plt.figure(figsize=(cardx + 2*border, cardy + 2*border))
     plt.subplots_adjust(left=border/(cardx+2*border),
@@ -406,9 +409,9 @@ for card in cards:
              rotation_mode='anchor',
              horizontalalignment='center',
              verticalalignment='baseline',)
-    plt.savefig('cards-{}/{}.png'.format(card.rarity,
-                                         card.filename()),
-                dpi=300)
+    # plt.savefig('cards-{}/{}.png'.format(card.rarity,
+    #                                      card.filename()),
+    #             dpi=300)
     if card.copies > 0:
         plt.savefig('cards-count/{}[{}].png'.format(card.filename(),
                                                     card.copies),

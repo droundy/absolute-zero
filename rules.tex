@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+
+\usepackage[paperwidth=2.5in,paperheight=3.5in,width=2.0in,height=3.0in]{geometry}
+
+\pagestyle{empty}
+\thispagestyle{empty}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=100
+\hbadness=10000
+
+\newcommand\myssection[1]{\begin{center}\bf\small\noindent #1\end{center}}
+\newcommand\myheader[1]{\begin{center}\small\sc #1\end{center}}
+
+\begin{document}
+
+\myheader{\Large\sc Physics! \footnotesize \\  the game}
+
+\tiny
+
+\myssection{Setup} Begin by dealing out all the cards as face-down
+draw piles for each player.  Each player draws $N$ cards.
+
+\myssection{Play} Play begins with the youngest player and proceeds
+clockwise.  Each player has a choice to
+\begin{enumerate}
+\item Declare themselves the winner, if their hand and draw pile are
+  empty.
+\item Play a card face-up into the play area.  The card may be played
+  onto one or more existing cards, indicating that it modifies those
+  cards.  The player then draws a card from their draw pile if
+  possible.
+\item Challenge the player who previously played.
+\end{enumerate}
+
+\clearpage
+\myheader{Challenge!} The challenged player must describe a tenable
+single-part physics problem that incorporates all the elements in
+play.  Each element must have relevance to the outcome of the problem,
+and the problem must be solvable.  The players must reach consensus as
+to whether this has been achieved, possibly with the challenged player
+actually solving the problem.
+
+\myssection{Problem solved} The cards in play are moved to the discard
+pile, and play continues with the challenged player smugly taking the
+next turn.
+
+\myssection{No adequate problem} The challenged player shuffles the
+cards in play into his draw pile with chagrin, and play continues with
+the challenger gleefully taking the next turn.
+
+\end{document}
