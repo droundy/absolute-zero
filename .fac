@@ -18,3 +18,6 @@ c errors.log
 
 | inkscape box.svg --export-dpi=375 --export-png=box.png
 c errors.log
+
+| convert -density 300 rules.pdf -quality 90 rules.png
+c errors.log
