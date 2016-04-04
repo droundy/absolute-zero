@@ -21,3 +21,6 @@ c errors.log
 
 | convert -density 300 rules.pdf -quality 90 rules.png
 c errors.log
+
+| cp rules-0.png cards-count/rules[face,1].png
+| cp rules-1.png cards-count/rules[back,1].png
