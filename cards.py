@@ -178,8 +178,10 @@ exam(125.8, 'c', [
     '2x', 'angle', 'cylinder', 'equation of motion', 'gravity',
     'moment of inertia', 'rolling without slipping', 'solid', 'surface'])
 
+num_cards = 107
+
 total_history = sum([len(c.history) for c in cards])
-history_per_copy = total_history/108
+history_per_copy = total_history/num_cards
 print 'history_per_copy', history_per_copy
 cards.sort() # first sort alphabetically
 cards.sort(key=lambda x: len(x.history))
@@ -202,7 +204,7 @@ rares = sorted([c for c in cards
 commons = sorted([c for c in cards
                   if c.rarity == 'common'])
 cards.reverse()
-copies_left = 108
+copies_left = num_cards
 for c in cards:
     ncopy = int(round(len(c.history)/history_per_copy))
     if ncopy < copies_left:
