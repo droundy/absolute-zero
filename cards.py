@@ -114,7 +114,7 @@ exam(123.7, 'c', [
     'angle', 'small', 'equilibrium', 'frequency', 'oscillation'])
 exam(123.8, 'c', [
     'solid', 'sphere', 'mass', 'radius', 'stationary', 'velocity',
-    'angular momentum', 'slips', 'friction', 'coefficient of friction',
+    'angular', 'momentum', 'slips', 'friction', 'coefficient of friction',
     'moment of inertia', 'rolling without slipping', 'energy', 'kinetic',
     'heat', 'time', 'distance'])
 exam(124.1, 'q', [
@@ -152,7 +152,7 @@ exam(125.1, 'q', [
 exam(125.2, 'q', [
     'hydrogen atom', 'large', 'magnetic field', 'magnetic moment',
     'orbital', 'quantum', 'number', 'small',
-    'atom', 'angular momentum', 'degeneracy', 'electron', 'energy'])
+    'atom', 'angular', 'momentum', 'degeneracy', 'electron', 'energy'])
 exam(125.3, 'e', [
     'frequency', 'index of refraction', 'light', 'magnetic field', 'plasma',
     'Poynting vector', 'reflection', 'time', 'transmission', 'vacuum',
@@ -169,7 +169,7 @@ exam(125.5, 't', [
 exam(125.6, 't', [
     'rigid', 'temperature',
     'low', 'moment of inertia', 'number', 'quantum', 'rigid rotor',
-    'angular momentum', 'eigenvalue', 'energy', 'high', 'internal'])
+    'angular', 'momentum', 'eigenvalue', 'energy', 'high', 'internal'])
 exam(125.7, 'c', [
     'point', 'ring', 'spring', 'time', 'velocity',
     'frequency', 'frictionless', 'mass', 'normal modes', 'oscillation',
@@ -177,6 +177,91 @@ exam(125.7, 'c', [
 exam(125.8, 'c', [
     '2x', 'angle', 'cylinder', 'equation of motion', 'gravity',
     'moment of inertia', 'rolling without slipping', 'solid', 'surface'])
+exam(122.1, 'e', ['semi-infinite', 'electric', 'potential', '2x', 'plate',
+                  'flat', 'metal', 'boundary conditions', 'series solution',
+                  'approximation'])
+exam(122.2, 'c', ['spring', 'ball', 'point', 'mass', 'sphere', 'immovable',
+                  'wall', 'characteristic', 'natural', 'frequency', '2x',
+                  'normal modes', 'infinite', 'neighbor', '1D'])
+exam(122.3, 't', ["Curie's law", 'equation of state', 'paramagnet',
+                  'internal', 'energy', 'magnetization', 'magnetic field',
+                  'Carnot', 'engine', 'temperature',
+                  'First Law of Thermodynamics', 'adiabatic', 'process',
+                  'isothermal', 'heat', 'work', 'system', 'efficiency',
+                  'cycle'])
+exam(122.4, 'q', ['electron', 'charge', 'mass', 'infinite', 'potential',
+                  'well', 'ground', 'state', 'excited', 'expectation value',
+                  'energy', r'$|1\rangle$', r'$|2\rangle$', 'time', 'position'])
+exam(122.5, 'c', ['steam', 'rotating', 'shaft', '2x', 'hinge', 'mass', 'slide',
+                  'coplanar', 'point', 'angular', 'velocity', 'gravity', 'angle',
+                  'position'])
+exam(122.6, 'q', ['potential', 'well', '3x', 'step', 'infinity', 'wavefunction',
+                  'ground', 'state', 'eigenstate', 'energy', 'probability',
+                  'reflection', 'transmission'])
+exam(122.7, 'e', ['charge', 'constant', 'volume', 'density', 'infinite',
+                  'long', 'cylinder', 'radius', 'rotate', 'axis',
+                  'angular', 'velocity', 'perpendicular', 'azimuthal', 'angle',
+                  'symmetry', 'zero', 'current', 'density',
+                  'cylindrical coordinates', 'magnetic field', 'outside',
+                  'inside', 'distance'])
+exam(122.8, 't', ['quantum', 'system', '3x', 'energy', 'level', '2x',
+                  'identical', 'particle', 'temperature', 'heat', 'resevoir',
+                  'state', 'configuration', 'Fermi-Dirac statistics',
+                  'fermion', 'spin 1/2', 'up', 'Bose-Einstein statistics',
+                  'spin 0', 'boson', 'classical',
+                  'Maxwell-Boltzmann statistics'])
+exam(121.1,'e',['wire', 'loop', 'circle', 'radius', 'current',  'angle',
+                'cone', 'magnetic field', 'solenoid', 'infinite', 'small',
+                'distance', 'axial'])
+exam(121.2,'c',['mass', 'bead', 'constrained', 'gravity', 'frictionless',
+                'wire', 'rotate', 'angular', 'velocity', 'Hamiltonian',
+                'generalized', 'momentum', 'sketch', 'phase', 'energy',
+                'oscillation'])
+exam(121.3,'t',['adsorption', 'equilibrium', 'gas', 'pressure', 'box', 'volume',
+                'metal','surface', 'energy', 'work', 'infinity', 'ideal gas',
+                '2d', 'atom', 'partition function', 'free energy', 'chemical',
+                'potential', 'number'])
+exam(121.4,'q',['hydrogen', '2s', '2p', 'state', 'energy', 'electric field',
+                'uniform', 'spin', 'degeneracy'])
+exam(121.5,'c',['pendulum', '2x', 'point', 'mass', 'string', 'massless',
+                'angular', 'motion', 'Lagrangian', 'harmonic'])
+exam(121.6,'q',['free', 'particle', 'mass', 'constrained', 'circle', 'time',
+                'wavefunction', 'angular', 'momentum', 'measurement',
+                'energy', 'torus','system'])
+exam(121.7,'e',['wave equation', 'electric field', 'magnetic field',
+                'homogeneous', 'dielectric', 'free', 'charge', 'current',
+                'vector space', 'coordinate system', 'Cartesian coordinates',
+                'vector', 'scalar', 'velocity', 'wave', 'length', 'high',
+                'limit'])
+exam(121.8,'t',['Einstein', 'heat', 'capacity', 'simple harmonic oscillator',
+                'frequency', 'energy', 'level', 'crystal', 'atom',
+                'partition function', 'oscillator', 'temperature', 'low',
+                'high'])
+exam(120.1,'e',['metal', 'conducting', 'insulator', 'dielectric', 'sphere',
+                'mass', 'radius', 'charge', 'surface', 'density', ])
+exam(120.2,'c',['bead', 'mass', 'gravity', 'frictionless', 'surface',
+                'point', 'particle', 'equation of motion', 'perturbation',
+                'oscillation', 'angular', 'velocity', 'circle', 'height'])
+exam(120.3,'t',['particle', 'spin 1/2', 'lattice', 'neighbor', 'Hamiltonian',
+                'Ising model', 'spin', 'partition function', 'temperature',
+                'energy', 'limit', 'entropy', ])
+exam(120.4,'q',['potential', 'energy', 'nonrelativistic', 'particle',
+                'mass', 'well', 'bound', 'state', 'continuous', 'barrier',
+                'reflection', 'transmission', 'probability','momentum',])
+exam(120.5,'t',['reversible', 'refridgerator', 'solid', 'temperature', 'heat',
+                'engine', 'resevoir', 'efficiency', 'work',
+                'capacity', 'entropy', 'internal', 'energy',])
+exam(120.6,'q',['2x', 'spin 1/2', 'particle', 'mass', 'infinite', 'square',
+                'well', 'width', 'eigenstate', 'energy', 'eigenvalue',
+                'singlet', 'triplet', 'interaction', 'strength', 'length',
+                'first-order', 'correction', 'interpret'])
+exam(120.7,'c',['2x', 'mass','spring','constant', 'fixed', 'frictionless',
+                'position', 'frequency', 'small', 'amplitude', 'oscillation',
+                'stable', 'real', 'characteristic', 'normal modes',
+                'trajectory', 'equilibrium'])
+exam(120.8,'e',['insulator', 'ring', 'mass', 'charge', 'frictionless',
+                'uniform', 'time', 'stationary', 'magnetic field', 'torque',
+                'angular', 'momentum', 'infinity'])
 
 num_cards = 107
 
@@ -204,15 +289,15 @@ rares = sorted([c for c in cards
 commons = sorted([c for c in cards
                   if c.rarity == 'common'])
 cards.reverse()
-copies_left = num_cards
-for c in cards:
-    ncopy = int(round(len(c.history)/history_per_copy))
-    if ncopy < copies_left:
+copies_left = -1
+while copies_left < 0:
+    copies_left = num_cards
+    for c in cards:
+        ncopy = int(round(len(c.history)/history_per_copy))
         c.copies = ncopy
         copies_left -= ncopy
-    else:
-        c.copies = copies_left
-        copies_left = 0
+    history_per_copy *= 1.01 # try a bit fewer
+
 for c in cards:
     if copies_left > 0:
         c.copies += 1
