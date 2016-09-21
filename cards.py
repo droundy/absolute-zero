@@ -51,10 +51,15 @@ subject_for_question = {}
 aliases = {
     '2x': r'$2\times$',
     '3x': r'$3\times$',
+    'sketch': 'sketch (diagram)',
+    'diagram': 'sketch (diagram)',
     'spin 1/2 atom': r'spin $\frac12$ atom',
+    'spin 1/2': r'spin $\frac12$',
     'Schrodinger equation': r'Schr\"odinger equation',
     'Schroedinger equation': r'Schr\"odinger equation',
     'Lambda system': r'$\Lambda$ system',
+
+    'wavefunction': r'wave function',
 
     'small': r'small (short) (low)',
     'short': r'small (short) (low)',
@@ -147,7 +152,7 @@ exam(124.8, 'c', [
     'train', 'velocity',
     'frictionless', 'mass', 'number', 'person', 'relative', 'speed'])
 exam(125.1, 'q', [
-    'magnetic moment', 'measurement', 'speed', 'spin 1/2 atom', 'spin',
+    'magnetic moment', 'measurement', 'speed', 'spin 1/2', 'atom', 'spin',
     '2x', 'distance', 'eigenstate', 'eigenvalue', 'energy', 'magnetic field'])
 exam(125.2, 'q', [
     'hydrogen atom', 'large', 'magnetic field', 'magnetic moment',
@@ -219,7 +224,7 @@ exam(121.2,'c',['mass', 'bead', 'constrained', 'gravity', 'frictionless',
                 'oscillation'])
 exam(121.3,'t',['adsorption', 'equilibrium', 'gas', 'pressure', 'box', 'volume',
                 'metal','surface', 'energy', 'work', 'infinity', 'ideal gas',
-                '2d', 'atom', 'partition function', 'free energy', 'chemical',
+                '2D', 'atom', 'partition function', 'free energy', 'chemical',
                 'potential', 'number'])
 exam(121.4,'q',['hydrogen', '2s', '2p', 'state', 'energy', 'electric field',
                 'uniform', 'spin', 'degeneracy'])
@@ -262,6 +267,59 @@ exam(120.7,'c',['2x', 'mass','spring','constant', 'fixed', 'frictionless',
 exam(120.8,'e',['insulator', 'ring', 'mass', 'charge', 'frictionless',
                 'uniform', 'time', 'stationary', 'magnetic field', 'torque',
                 'angular', 'momentum', 'infinity'])
+exam(119.1,'c',['mass', 'gravity', 'drag', 'velocity', 'time', 'position',
+                'zero', 'terminal', 'speed', 'limit'])
+exam(119.2,'q',['identical', 'particle', '2x', '1D',
+                'simple harmonic oscillator', 'potential', 'spring',
+                'Hamiltonian', 'position', 'momentum', 'spin 0', 'boson',
+                'state', 'degeneracy', 'energy', 'spin 1/2', 'fermion',
+                'eigenvalue', 'small', 'interaction', 'confined',
+                'perturbation', 'first-order', 'correction'])
+exam(119.3,'t',['solid', 'nuclei', 'noninteracting', 'energy', 'spin 1/2',
+                'ground', 'state', 'excited', 'uniform', 'magnetic field',
+                'internal', 'temperature', 'heat', 'capacity', 'spin 1',
+                'degenerate', 'high'])
+exam(119.4,'e',['parallel', 'plate', 'capacitor', 'charge', 'air', 'radius',
+                'current', 'wire', 'density', 'displacement', 'electric field',
+                'induced', 'magnetic field', 'distance'])
+exam(119.5,'c',['strong', 'weak', 'bond', 'oscillation', 'rigid', 'spring',
+                'wall', 'Lagrangian', 'longitudinal', 'normal modes',
+                'equilibrium', 'frequency', 'eigenvalue', '3x', 'atom',
+                'stationary'])
+exam(119.6,'q',['1D', 'ground','state', 'box', 'length', 'quickly', 'time',
+                'expectation value', 'energy', 'probability', 'eigenstate',
+                'wave function', 'zero'])
+exam(119.7,'t',['van der Waals', 'gas', 'equation of state', 'abruptly',
+                'free', 'expansion', 'heat', 'capacity', 'volume',
+                'temperature'])
+exam(119.8,'e',['plane', 'wave', 'angular', 'frequency', 'normally', 'incident',
+                'metal', 'slab', 'power', 'reflection', 'conductivity',
+                'interface'])
+exam(118.1,'c',['infinite', 'number', 'mass', 'coupled', 'equilibrium',
+                'string', 'tension', 'frictionless', 'transverse', 'small',
+                'displacement', 'constrained', 'equation of motion', 'neighbor',
+                'diagram', 'normal modes', 'wave', 'vector',
+                'disperion relation', 'frequency', 'energy', 'infinity'])
+exam(118.2,'q',['state', 'system', 'density matrix', 'spin 1/2', 'time',
+                'trace'])
+exam(118.3,'t',['noninteracting', 'atom', 'number', 'temperature',
+                'magnetic field', 'volume', 'energy', 'angular', 'momentum',
+                'moment', 'magnetization', 'low', 'temperature',
+                'susceptiblity', 'high', 'sketch'])
+exam(118.4,'e',['4x', 'point', 'charge', 'positive', 'square', 'distance',
+                'force', 'motion', 'describe', 'equidistant'])
+exam(118.5,'c',['pendulum', 'massless', 'disk', 'rotate', 'angular', 'velocity',
+                'axis', 'Lagrangian', 'equation of motion', 'small',
+                'frequency', 'simple harmonic oscillator'])
+exam(118.6,'q',['electron', 'mass', 'symmetric', 'potential', 'angular',
+                'momentum', 'hydrogen', 'atom', 'energy', 'eigenvalue',
+                'ground', 'state', 'interaction', ])
+exam(118.7,'t',['monatomic','gas', 'Carnot cycle', 'temperature',
+                'isothermal', 'volume', 'heat', 'capacity', 'work',
+                'entropy'])
+exam(118.8,'e',['standing', 'wave', 'parallel', 'plates', 'metal', 'distance',
+                'vacuum', 'electric field', 'magnetic field', 'time', 'surface',
+                'charge', 'density', 'position'])
 
 num_cards = 107
 
