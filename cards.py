@@ -70,7 +70,8 @@ for color in ['red', 'blue', 'green', 'white']:
                 f.write(drawing('[yshift=.55in] current page.center'))
                 f.write(drawing('[xshift=+.525in, yshift=-.35in] current page.center'))
                 f.write(drawing('[xshift=-.525in, yshift=-.35in] current page.center'))
-            f.write(string.Template(r'''
-  \end{tikzpicture}
-\end{document}
+            f.write(string.Template(r'''\node [anchor=north,anchor=center] at ([yshift=-.4in]current page.north) { \Huge\color{\mybg} $color };
+            \node [anchor=south, rotate=180,anchor=center] at ([yshift=.4in]current page.south) { \Huge\color{\mybg} $color };
+
+  \end{tikzpicture}\end{document}
 ''').substitute(color=color, number=number))

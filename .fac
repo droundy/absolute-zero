@@ -1,5 +1,8 @@
 | pdflatex rules.tex && pdflatex rules.tex
-< rules.tex
+c .aux
+c .log
+
+| pdflatex back.tex
 c .aux
 c .log
 
@@ -9,14 +12,11 @@ c .pyc
 > cards/.fac
 # > cards.tex
 
-| inkscape back.svg --export-dpi=300 --export-png=back.png
-c errors.log
-
 | inkscape box.svg --export-dpi=375 --export-png=box.png
 c errors.log
 
 | convert -density 300 rules.pdf -quality 90 rules.png
 c errors.log
 
-| cp rules-0.png cards-count/rules[face,1].png
-| cp rules-1.png cards-count/rules[back,1].png
+| convert -density 300 back.pdf -quality 90 back.png
+c errors.log
