@@ -1,8 +1,3 @@
-| pdflatex cards.tex && pdflatex cards.tex
-< cards.tex
-c .aux
-c .log
-
 | pdflatex rules.tex && pdflatex rules.tex
 < rules.tex
 c .aux
@@ -11,6 +6,7 @@ c .log
 | python2 cards.py
 C ~/.cache
 c .pyc
+> cards/.fac
 # > cards.tex
 
 | inkscape back.svg --export-dpi=300 --export-png=back.png
