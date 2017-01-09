@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 
 \usepackage[paperwidth=2.75in,paperheight=3.75in,width=2.25in,height=3.25in]{geometry}
+\usepackage{tikz}
 
 \pagestyle{empty}
 \thispagestyle{empty}
@@ -15,14 +16,36 @@
 
 \begin{document}
 
-\myheader{\Large\sc Absolute Zero}
+\color{black}
+\begin{tikzpicture}[remember picture,overlay]
+  \node [shape=rectangle, fill=black, minimum height=\paperheight, minimum width=\paperwidth, anchor=south west] at (current page.south west) {};
+  \node [shape=circle, fill=white, minimum width=1.3in] at (current page.center) {};
+  \node [shape=circle, fill=red, minimum width=.75in] at ([xshift=0in, yshift=.75in]current page.center) {};
+  \node [shape=circle, fill=red, minimum width=.75in] at ([xshift=0in, yshift=-.75in]current page.center) {};
+  \node [shape=circle, fill=blue, minimum width=.75in] at ([xshift=.65in, yshift=.375in]current page.center) {};
+  \node [shape=circle, fill=blue, minimum width=.75in] at ([xshift=-.65in, yshift=-.375in]current page.center) {};
+  \node [shape=circle, fill=green, minimum width=.75in] at ([xshift=.65in, yshift=-.375in]current page.center) {};
+  \node [shape=circle, fill=green, minimum width=.75in] at ([xshift=-.65in, yshift=.375in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.45in, minimum height=.15in] at ([xshift=-.65in, yshift=.375in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.45in, minimum height=.15in] at ([xshift=+.65in, yshift=-.375in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.45in, minimum height=.15in] at ([xshift=+.65in, yshift=.375in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.45in, minimum height=.15in] at ([xshift=-.65in, yshift=-.375in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.45in, minimum height=.15in] at ([xshift=0in, yshift=.75in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.45in, minimum height=.15in] at ([xshift=0in, yshift=-.75in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.15in, minimum height=.45in] at ([xshift=-.65in, yshift=.375in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.15in, minimum height=.45in] at ([xshift=+.65in, yshift=.375in]current page.center) {};
+  \node [shape=rectangle, fill=white, minimum width=.15in, minimum height=.45in] at ([yshift=-.75in]current page.center) {};
+  \node [anchor=north] at ([yshift=-.4in] current page.north) {\color{white}\Large\sc Absolute Zero};
+\end{tikzpicture}
+\clearpage
 
-\tiny
-
-\begin{center}
-  \em 2-5 players\\
-  age 5+
-\end{center}
+\begin{tikzpicture}[remember picture,overlay]
+    \node [shape=rectangle, fill=red, minimum height=\paperheight,
+      minimum width=\paperwidth, anchor=south west] at (current
+    page.south west) {};
+\end{tikzpicture}
+%\color{white}
+\small
 
 \noindent Absolute Zero plays as a standard trump game, where suits
 are defined by color and the white suit is trump.  Deal rotates
@@ -35,6 +58,13 @@ positive numbers are greater than negative values), or the highest
 card in the color that was lead if no white card was played.  The player
 who wins a trick leads for the next trick.
 
+\clearpage
+\begin{tikzpicture}[remember picture,overlay]
+    \node [shape=rectangle, fill=blue, minimum height=\paperheight,
+      minimum width=\paperwidth, anchor=south west] at (current
+    page.south west) {};
+\end{tikzpicture}
+
 \myssection{Scoring} At the end of each hand, players count the
 total value of tricks they captured.  If this number is nonzero, their
 score for the hand is the absolute value of this integer.  If this
@@ -43,9 +73,25 @@ number of cards captured.
 
 Play continues until one player reaches a cumulate score of 100.
 
-\myssection{Cooperative play} As an alternative, play can be
-cooperative:  the total score for each hand is the total of all
-players contributions for that hand.  Play continues until the total
-reaches 100 times the number of players.
+\clearpage
+\begin{tikzpicture}[remember picture,overlay]
+    \node [shape=rectangle, fill=green, minimum height=\paperheight,
+      minimum width=\paperwidth, anchor=south west] at (current
+    page.south west) {};
+\end{tikzpicture}
+
+\begin{center}
+  \em 2-5 players\\
+  age 5+
+\end{center}
+
+\noindent {\sc Absolute Zero} is simple enough to be learned by young
+children, while still being challenging for adults.
+
+\myssection{Cooperative play} Play can be cooperative: the total score
+for each hand is the total of all players contributions for that hand.
+Play continues until the total reaches 100 times the number of
+players.  This is particularly suitable when there is a wide disparity
+in age or skill.
 
 \end{document}

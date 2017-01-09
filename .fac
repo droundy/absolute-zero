@@ -12,7 +12,7 @@ c .pyc
 > cards/.fac
 # > cards.tex
 
-| inkscape box.svg --export-dpi=375 --export-png=box.png
+| inkscape box.svg --export-dpi=90 --export-png=box.png
 c errors.log
 
 | convert -density 300 rules.pdf -quality 90 rules.png
