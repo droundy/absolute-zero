@@ -30,3 +30,7 @@ c errors.log
 
 | convert -density 300 back.pdf -quality 90 back.png
 c errors.log
+
+| inkscape action-1.svg -D --export-dpi=30 --export-png=action-1.png
+| inkscape action-2.svg -D --export-dpi=30 --export-png=action-2.png
+| inkscape action-3.svg -D --export-dpi=30 --export-png=action-3.png
