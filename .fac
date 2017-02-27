@@ -6,6 +6,12 @@ c .log
 c .aux
 c .log
 
+| pdflatex logo.tex && pdflatex logo.tex
+c .aux
+c .log
+
+| convert -density 150 logo.pdf -quality 90 logo.png
+
 | python2 cards.py
 C ~/.cache
 c .pyc
@@ -13,7 +19,11 @@ c .pyc
 # > cards.tex
 
 | inkscape box.svg --export-dpi=90 --export-png=box.png
-c errors.log
+
+| inkscape real-logo.svg --export-dpi=96 --export-png=real-logo.png
+
+| inkscape backdrop.svg --export-dpi=96 --export-png=backdrop.png
+| inkscape advertizement.svg --export-dpi=96 --export-png=advertizement.png
 
 | convert -density 300 rules.pdf -quality 90 rules.png
 c errors.log
