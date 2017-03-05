@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 
-\usepackage[paperwidth=2.75in,paperheight=3.75in,width=2.25in,height=3.25in]{geometry}
+\usepackage[paperwidth=2.75in,paperheight=3.75in,width=2.0in,height=3.0in]{geometry}
 \usepackage{tikz}
 
 \pagestyle{empty}
@@ -43,18 +43,21 @@
     \node [shape=rectangle, fill=red, minimum height=\paperheight,
       minimum width=\paperwidth, anchor=south west] at (current
     page.south west) {};
+    \node [shape=rectangle, fill=white, minimum height=3.25in,
+      minimum width=2.25in, anchor=center] at (current
+    page.center) {};
 \end{tikzpicture}
 %\color{white}
-\small
+\footnotesize
 
-\noindent Absolute Zero plays as a standard trump game, where suits
+\noindent {\sc Absolute Zero} plays as a standard trump game, where suits
 are defined by color and the white suit is trump.  Deal rotates
 clockwise, and the dealer leads the first trick.
 
 Players must follow suit if they have a card with the same color,
 otherwise they may play any card.  The winner of each trick is the
 player who played the highest-value white card (keeping in mind that
-positive numbers are greater than negative values), or the highest
+positive values are greater than negative values), or the highest
 card in the color that was lead if no white card was played.  The player
 who wins a trick leads for the next trick.
 
@@ -63,23 +66,32 @@ who wins a trick leads for the next trick.
     \node [shape=rectangle, fill=blue, minimum height=\paperheight,
       minimum width=\paperwidth, anchor=south west] at (current
     page.south west) {};
+    \node [shape=rectangle, fill=white, minimum height=3.25in,
+      minimum width=2.25in, anchor=center] at (current
+    page.center) {};
 \end{tikzpicture}
 
 \myssection{Scoring} At the end of each hand, players count the
 total value of tricks they captured.  If this number is nonzero, their
 score for the hand is the absolute value of this integer.  If this
 number is zero, then the player's score for the hand is the total
-number of cards captured.
+number of cards that player captured.
 
-Play continues until one player reaches a cumulate score of 100.
+Play continues until one player reaches a cumulative score of 100.  If
+more than one exceeds 100 after a hand, then the player with the
+highest score wins.
 
 \clearpage
 \begin{tikzpicture}[remember picture,overlay]
     \node [shape=rectangle, fill=green, minimum height=\paperheight,
       minimum width=\paperwidth, anchor=south west] at (current
     page.south west) {};
+    \node [shape=rectangle, fill=white, minimum height=3.25in,
+      minimum width=2.25in, anchor=center] at (current
+    page.center) {};
 \end{tikzpicture}
 
+\vspace{-0.1in}
 \begin{center}
   \em 2-5 players\\
   age 5+
