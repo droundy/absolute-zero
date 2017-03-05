@@ -29,7 +29,7 @@ for color in ['red', 'blue', 'green', 'white']:
         bg = 'white'
         fg = 'black'
     for number in range(-3,4):
-        fac.write('| pdflatex %s%d\n\n' % (color, number))
+        fac.write('| pdflatex %s%d && pdflatex %s%d\n\n' % (color, number, color, number))
         fac.write('| convert -density 300 %s%d.pdf -quality 90 %s%d.png\nc errors.log\n\n' % (color, number, color, number))
         with open('cards/%s%d.tex' % (color, number), 'w') as f:
             f.write(string.Template(r'''
