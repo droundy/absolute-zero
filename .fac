@@ -18,7 +18,9 @@ c .pyc
 > cards/.fac
 # > cards.tex
 
-| inkscape box.svg --export-dpi=90 --export-png=box.png
+| inkscape box.svg --export-dpi=96 --export-png=box.png
+
+| inkscape small-box.svg --export-dpi=400 --export-png=small-box.png
 
 | inkscape real-logo.svg --export-dpi=96 --export-png=real-logo.png
 
