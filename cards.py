@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 
-import numpy, re, os, functools, random, string
+import numpy, re, os, functools, random, string, math
 
 os.system('mkdir -p cards')
 fac = open('cards/.fac','w')
@@ -59,17 +59,21 @@ for color in ['red', 'blue', 'green', 'white']:
                 drawing = negative
             else:
                 drawing = positive
+            sidelen = 1.125
             if number == 0:
                 f.write(zero('current page.center'))
             elif abs(number) == 1:
                 f.write(drawing('current page.center'))
             elif abs(number) == 2:
-                f.write(drawing('[yshift=.75in] current page.center'))
-                f.write(drawing('[yshift=-.75in] current page.center'))
+                f.write(drawing('[yshift=%gin] current page.center' % (sidelen/2)))
+                f.write(drawing('[yshift=-%gin] current page.center' % (sidelen/2)))
             elif abs(number) == 3:
-                f.write(drawing('[yshift=.55in] current page.center'))
-                f.write(drawing('[xshift=+.525in, yshift=-.35in] current page.center'))
-                f.write(drawing('[xshift=-.525in, yshift=-.35in] current page.center'))
+                R = sidelen/math.cos(math.pi/6)/2
+                f.write(drawing('[yshift=%gin] current page.center' % R))
+                dx = R*math.cos(math.pi/6)
+                dy = -R*math.sin(math.pi/6)
+                f.write(drawing('[xshift=+%gin, yshift=%gin] current page.center' % (dx, dy)))
+                f.write(drawing('[xshift=-%gin, yshift=%gin] current page.center' % (dx, dy)))
             f.write(string.Template(r'''\node [anchor=north,anchor=center] at ([yshift=-.4in]current page.north) { \Large\color{\mybg}\sc $color };
             \node [anchor=south, rotate=180,anchor=center] at ([yshift=.4in]current page.south) { \Large\color{\mybg}\sc $color };
 
